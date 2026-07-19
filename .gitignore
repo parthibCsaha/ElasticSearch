@@ -1,0 +1,41 @@
+# Build results
+bin/
+obj/
+out/
+
+# Visual Studio cache/settings
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / IDE settings
+.idea/
+*.iml
+
+# ASP.NET Core local settings
+appsettings.*.local.json
+secrets.json
+
+# User secrets and local config
+*.local.json
+
+# NuGet
+*.nupkg
+*.snupkg
+
+# Test and coverage output
+TestResults/
+coverage/
+coverage*.json
+
+# Logs
+*.log
+
+# Publish output
+publish/
+
+# OS files
+.DS_Store
+Thumbs.db
