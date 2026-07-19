@@ -15,9 +15,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-git add .
-git commit -m "Initial commit"
-git push -u origin main
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
