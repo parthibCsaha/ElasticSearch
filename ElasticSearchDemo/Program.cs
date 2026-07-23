@@ -1,5 +1,7 @@
 using Elastic.Clients.Elasticsearch;
-
+using Elastic.Transport;
+using Microsoft.AspNetCore.Http.Connections;
+using System.Net.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +12,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(_ =>
 {
     var settings = new ElasticsearchClientSettings(
-        new Uri("https://localhost:9200"))
-        .DefaultIndex("products");
+            new Uri("https://localhost:9200"))
+        .Authentication(new BasicAuthentication("elastic", "tm14aXThh7PadRnh1qyC"))
+        .ServerCertificateValidationCallback(
+            (sender, certificate, chain, sslPolicyErrors) => true)
+        .DefaultIndex("products")
+        .DisableDirectStreaming();
 
     return new ElasticsearchClient(settings);
 });
@@ -24,9 +30,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.MapGet("/ping-es", async (ElasticsearchClient client) =>
+{
+    var ping = await client.PingAsync();
 
-app.UseAuthorization();
+    return ping.IsValidResponse
+        ? Results.Ok("Elasticsearch Connected")
+        : Results.BadRequest(ping.DebugInformation);
+});
 
 app.MapControllers();
 
