@@ -15,7 +15,7 @@ out/
 *.iml
 
 # ASP.NET Core local settings
-appsettings.*.local.json
+appsettings*.json
 secrets.json
 
 # User secrets and local config

@@ -19,11 +19,6 @@ namespace ElasticSearchDemo.Controllers
             _db = db;
         }
 
-        // ──────────────────────────────────────
-        //  CRUD — Database Operations
-        // ──────────────────────────────────────
-
-        /// <summary>Get all products from the database.</summary>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -31,7 +26,6 @@ namespace ElasticSearchDemo.Controllers
             return Ok(products);
         }
 
-        /// <summary>Get a single product by ID from the database.</summary>
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -40,7 +34,6 @@ namespace ElasticSearchDemo.Controllers
             return Ok(product);
         }
 
-        /// <summary>Create a new product → save to DB + index into Elasticsearch.</summary>
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Product product)
         {
@@ -55,7 +48,6 @@ namespace ElasticSearchDemo.Controllers
             return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
         }
 
-        /// <summary>Update an existing product → update DB + re-index in Elasticsearch.</summary>
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] Product product)
         {
@@ -77,7 +69,6 @@ namespace ElasticSearchDemo.Controllers
             return Ok(existing);
         }
 
-        /// <summary>Delete a product → remove from DB + delete from Elasticsearch index.</summary>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -93,11 +84,7 @@ namespace ElasticSearchDemo.Controllers
             return NoContent();
         }
 
-        // ──────────────────────────────────────
-        //  Seed — Insert sample data into DB + Elasticsearch
-        // ──────────────────────────────────────
 
-        /// <summary>Seed sample products into the database and index them in Elasticsearch.</summary>
         [HttpPost("seed")]
         public async Task<IActionResult> Seed()
         {
@@ -132,11 +119,6 @@ namespace ElasticSearchDemo.Controllers
             return Ok($"Seeded {products.Count} products into DB + Elasticsearch.");
         }
 
-        // ──────────────────────────────────────
-        //  Sync — Re-index all DB products into Elasticsearch
-        // ──────────────────────────────────────
-
-        /// <summary>Re-index all products from the database into Elasticsearch.</summary>
         [HttpPost("sync")]
         public async Task<IActionResult> SyncToElasticsearch()
         {
@@ -152,11 +134,7 @@ namespace ElasticSearchDemo.Controllers
             return Ok($"Synced {products.Count} products from DB → Elasticsearch.");
         }
 
-        // ──────────────────────────────────────
-        //  Search — via Elasticsearch (unchanged logic)
-        // ──────────────────────────────────────
-
-        /// <summary>Full-text search via Elasticsearch.</summary>
+   
         [HttpGet("search")]
         public async Task<IActionResult> Search(string term)
         {
