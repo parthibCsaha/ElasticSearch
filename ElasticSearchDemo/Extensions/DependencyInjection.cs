@@ -1,6 +1,7 @@
 ﻿using Elastic.Clients.Elasticsearch;
 using Elastic.Transport;
 using ElasticSearchDemo.Data;
+using ElasticSearchDemo.Services;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -30,6 +31,8 @@ namespace ElasticSearchDemo.Extensions
 
                 return new ElasticsearchClient(settings);
             });
+
+            services.AddScoped<ProductIndexService>();
 
             return services;
         }
