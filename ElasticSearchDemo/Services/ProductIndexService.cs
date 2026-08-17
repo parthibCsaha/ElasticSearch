@@ -18,7 +18,7 @@ namespace ElasticSearchDemo.Services
         public async Task<List<Product>> GetAllProducts()
         {
             var response = await _esClient.SearchAsync<Product>(s => s
-                    .Index("products")
+                    .Indices("products")
                     .Query(q => q.MatchAll())
                 );
             if (!response.IsValidResponse)
@@ -54,7 +54,10 @@ namespace ElasticSearchDemo.Services
 
             await _context.SaveChangesAsync();
 
-            await _esClient.IndexAsync(existing, i => i.Index("products").Id(existing.Id));
+            await _esClient.IndexAsync(existing, 
+                            i => i
+                            .Index("products")
+                            .Id(existing.Id));
             return existing;
         }
 
@@ -85,7 +88,7 @@ namespace ElasticSearchDemo.Services
         public async Task<List<Product>> SearchProducts(string term)
         {
             var response = await _esClient.SearchAsync<Product>(s => s
-                .Index("products")
+                .Indices("products")
                 .Query(q => q.MultiMatch(mm => mm
                     .Query(term)
                     .Fields(new[] { "name", "description", "category" })

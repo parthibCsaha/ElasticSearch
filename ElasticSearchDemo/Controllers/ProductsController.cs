@@ -19,14 +19,14 @@ namespace ElasticSearchDemo.Controllers
         public async Task<IActionResult> GetAll()
         {
             try
-        {
-            var products = await _productIndexService.GetAllProducts();
-            return Ok(products);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest();
-        }
+            {
+                var products = await _productIndexService.GetAllProducts();
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet("{id:int}")]
