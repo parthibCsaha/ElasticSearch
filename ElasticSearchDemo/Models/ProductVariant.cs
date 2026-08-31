@@ -6,7 +6,7 @@ namespace ElasticSearchDemo.Models
     {
         public int Id { get; set; }
 
-        public int ProductId { get; set; }
+        public string SellerProductSku { get; set; }
 
         public string Name { get; set; } = string.Empty;
 

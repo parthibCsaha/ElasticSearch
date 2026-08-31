@@ -1,5 +1,6 @@
 ﻿using Elastic.Clients.Elasticsearch;
 using ElasticSearchDemo.Data;
+using ElasticSearchDemo.Dto;
 using ElasticSearchDemo.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,8 +34,16 @@ namespace ElasticSearchDemo.Services
             return await _context.Products.FindAsync(id);
         }
 
-        public async Task<Product> CreateProduct(Product product)
+        public async Task<Product> CreateProduct(CreateProductDto dto)
         {
+            var product = new Product
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                Price = dto.Price,
+                Category = dto.Category
+            };
+
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
@@ -54,8 +63,7 @@ namespace ElasticSearchDemo.Services
 
             await _context.SaveChangesAsync();
 
-            await _esClient.IndexAsync(existing, 
-                            i => i
+            await _esClient.IndexAsync(existing,  i => i
                             .Index("products")
                             .Id(existing.Id));
             return existing;

@@ -1,3 +1,4 @@
+using ElasticSearchDemo.Dto;
 using ElasticSearchDemo.Models;
 using ElasticSearchDemo.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -38,9 +39,9 @@ namespace ElasticSearchDemo.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Product product)
+        public async Task<IActionResult> Create([FromBody] CreateProductDto dto)
         {
-            var created = await _productIndexService.CreateProduct(product);
+            var created = await _productIndexService.CreateProduct(dto);
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
