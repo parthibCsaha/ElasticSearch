@@ -55,12 +55,19 @@ namespace ElasticSearchDemo.Data
                 entity.Property(v => v.Id)
                     .HasColumnName("Id");
 
+<<<<<<< HEAD
                 entity.Property(v => v.Name)
                     .HasColumnName("Name")
+=======
+               
+
+                entity.Property(v => v.Color)
+                    .HasColumnName("Color")
+>>>>>>> prodetails
                     .IsRequired();
 
-                entity.Property(v => v.Value)
-                    .HasColumnName("Value")
+                entity.Property(v => v.Size)
+                    .HasColumnName("Size")
                     .IsRequired();
             });
 
