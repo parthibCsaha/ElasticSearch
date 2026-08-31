@@ -14,6 +14,8 @@ namespace ElasticSearchDemo.Data
 
         public DbSet<ProductVariant> ProductVariants => Set<ProductVariant>();
 
+        public DbSet<ProductDetails> ProductDetails => Set<ProductDetails>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -42,11 +44,6 @@ namespace ElasticSearchDemo.Data
                 entity.Property(p => p.Category)
                     .HasColumnName("Category")
                     .IsRequired();
-
-                entity.HasMany(p => p.Variants)
-                    .WithOne(v => v.Product)
-                    .HasForeignKey(v => v.ProductId)
-                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<ProductVariant>(entity =>
@@ -58,15 +55,26 @@ namespace ElasticSearchDemo.Data
                 entity.Property(v => v.Id)
                     .HasColumnName("Id");
 
-                entity.Property(v => v.ProductId)
-                    .HasColumnName("ProductId");
-
                 entity.Property(v => v.Name)
                     .HasColumnName("Name")
                     .IsRequired();
 
                 entity.Property(v => v.Value)
                     .HasColumnName("Value")
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<ProductDetails>(entity =>
+            {
+                entity.ToTable("ProductDetails");
+
+                entity.HasKey(d => d.ProductDetailsId);
+
+                entity.Property(d => d.ProductDetailsId)
+                    .HasColumnName("ProductDetailsId");
+
+                entity.Property(d => d.SellerProductSku)
+                    .HasColumnName("SellerProductSku")
                     .IsRequired();
             });
         }

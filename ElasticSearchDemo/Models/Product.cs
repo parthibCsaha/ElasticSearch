@@ -12,7 +12,7 @@
 
         public string Category { get; set; } = string.Empty;
 
-        public ICollection<ProductVariant> Variants { get; set; }
-            = new List<ProductVariant>();
+        public ICollection<ProductDetails> ProductDetails { get; set; }
+            = new List<ProductDetails>();   
     }
 }
