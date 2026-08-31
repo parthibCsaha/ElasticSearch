@@ -43,10 +43,6 @@ namespace ElasticSearchDemo.Data
                     .HasColumnName("Category")
                     .IsRequired();
 
-                entity.HasMany(p => p.Variants)
-                    .WithOne(v => v.Product)
-                    .HasForeignKey(v => v.ProductId)
-                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<ProductVariant>(entity =>
@@ -58,8 +54,7 @@ namespace ElasticSearchDemo.Data
                 entity.Property(v => v.Id)
                     .HasColumnName("Id");
 
-                entity.Property(v => v.ProductId)
-                    .HasColumnName("ProductId");
+               
 
                 entity.Property(v => v.Name)
                     .HasColumnName("Name")

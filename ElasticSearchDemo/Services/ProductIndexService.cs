@@ -105,7 +105,7 @@ namespace ElasticSearchDemo.Services
             );
 
             if (!response.IsValidResponse)
-                throw new Exception($"Search failed: {response.DebugInformation}");
+                throw new Exception($"Product Search failed: {response.DebugInformation}");
 
             return response.Documents.ToList();
         }
