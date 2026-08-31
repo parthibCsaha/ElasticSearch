@@ -10,7 +10,7 @@
 
         public decimal Price { get; set; }
 
-        public string Category { get; set; } = string.Empty;
+        public string Category { get; set; } = string.Empty; // women
 
         public ICollection<ProductVariant> Variants { get; set; }
             = new List<ProductVariant>();
