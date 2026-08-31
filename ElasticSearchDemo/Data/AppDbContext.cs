@@ -44,6 +44,10 @@ namespace ElasticSearchDemo.Data
                 entity.Property(p => p.Category)
                     .HasColumnName("Category")
                     .IsRequired();
+<<<<<<< HEAD
+=======
+
+>>>>>>> prodetails
             });
 
             modelBuilder.Entity<ProductVariant>(entity =>
@@ -55,6 +59,11 @@ namespace ElasticSearchDemo.Data
                 entity.Property(v => v.Id)
                     .HasColumnName("Id");
 
+<<<<<<< HEAD
+=======
+               
+
+>>>>>>> prodetails
                 entity.Property(v => v.Name)
                     .HasColumnName("Name")
                     .IsRequired();
